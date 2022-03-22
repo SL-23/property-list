@@ -1,9 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
-
-interface PropertyListState {
-  resultList: Array<any>;
-  savedList: Array<any>
-}
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { PropertyListState } from "./PropertyListModels";
 
 const initialState: PropertyListState = {
   resultList: [],
@@ -14,6 +10,11 @@ const PropertyListSlice = createSlice({
   name: "propertyList",
   initialState,
   reducers: {
+    // get initial list
+    getPropertyList(state, action: PayloadAction<any>) {
+      state.resultList = action.payload.results;
+      state.savedList = action.payload.saved
+    },
     addSaved(state) {
 
     },
@@ -23,5 +24,5 @@ const PropertyListSlice = createSlice({
   }
 });
 
-export const { addSaved, removeSaved } = PropertyListSlice.actions;
+export const { addSaved, removeSaved, getPropertyList } = PropertyListSlice.actions;
 export default PropertyListSlice;
