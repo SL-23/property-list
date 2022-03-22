@@ -1,25 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { FC } from 'react';
+import { Container } from "@mui/material";
+import { Route, Routes } from "react-router-dom";
+import { appRoutes } from "./appRoutes";
+import { Header, Footer} from './common/components';
 
-function App() {
+interface TemplateProps {
+  children: React.ReactNode
+}
+
+const Template : FC<TemplateProps> = (props: TemplateProps) => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container 
+      disableGutters 
+      maxWidth={false} 
+    >
+      <Header/>
+      <main>{props.children}</main>
+      <Footer/>
+    </Container>
+  )
+}
+
+const App = () => {
+  //console.log(appRoutes);
+  return (
+    <>
+      <Routes>
+      {
+        appRoutes.map((r, i) => (
+          <Route
+            key={i}
+            path={r.path}
+            element={<Template> {r.element()} </Template>}
+          />
+        ))
+      }
+      </Routes>
+    </>
   );
 }
 
