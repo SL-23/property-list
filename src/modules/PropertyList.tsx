@@ -1,17 +1,30 @@
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 import { AppBar,Box, Button, Container, Toolbar, Typography, IconButton, useTheme } from "@mui/material";
-import * as React from 'react';
 import { Menu as MenuIcon } from '@mui/icons-material';
+import { LoadInitialData } from "../common/state/PropertyListActions";
+import { selectResults, selectStatus } from "../common/state/PropertyListSelectors";
+import ResultList from "./ResultList";
+
 
 
 const PropertyList = () => {
   const theme = useTheme();
-  console.log(theme.palette);
+  const dispatch = useDispatch();
+  const status = useSelector(selectStatus);
+  console.log(status);
+  useEffect(() => {
+    dispatch(LoadInitialData());
+  }, [])
+  if(!status) return null;
+  if(status.empty) return null;
+  if(!status.ready) console.log("loading"); 
+  
   return (
     <Container 
       maxWidth="md"
       sx={{
         minHeight: "1000px",
-        
       }}
     >
       <AppBar
@@ -35,7 +48,7 @@ const PropertyList = () => {
           >
             Property list
           </Typography>
-          
+          <ResultList/>
         </Toolbar>
       </AppBar>
 

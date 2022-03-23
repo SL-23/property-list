@@ -1,28 +1,37 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { PropertyListState } from "./PropertyListModels";
+import { ActionReducerMapBuilder, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { getPropertyList } from "./PropertyListActions";
+import { PropertyListState, PropertyItem } from "./PropertyListModels";
+
+const initialList: Record<string, PropertyItem> = {};
 
 const initialState: PropertyListState = {
-  resultList: [],
-  savedList: []
+  empty: true,
+  ready: false,
+  propertyList: initialList
+}
+
+const extraReducers = (builder: ActionReducerMapBuilder<PropertyListState>) => {
+  builder.addCase(
+    getPropertyList.fulfilled,
+    (state: PropertyListState, action: PayloadAction<Array<PropertyItem>>) => {
+      const list = action.payload;
+      list.map((item: PropertyItem, index: number) => {
+        const key = item.id;
+        const value = item;
+        state.propertyList[key] = value;
+      })
+      state.empty = list.length < 1;
+      state.ready = true;
+    }
+  )
 }
 
 const PropertyListSlice = createSlice({
   name: "propertyList",
   initialState,
   reducers: {
-    // get initial list
-    getPropertyList(state, action: PayloadAction<any>) {
-      state.resultList = action.payload.results;
-      state.savedList = action.payload.saved
-    },
-    addSaved(state) {
-
-    },
-    removeSaved(state) {
-
-    }
-  }
+  },
+  extraReducers
 });
 
-export const { addSaved, removeSaved, getPropertyList } = PropertyListSlice.actions;
 export default PropertyListSlice;

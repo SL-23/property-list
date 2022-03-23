@@ -3,18 +3,37 @@ import { PropertyListState } from "./PropertyListModels";
 
 const selectRoot = (state: PropertyListState) => state;
 
-export const selectResults = (state: any) => createSelector(
+const selectPropertyList = createSelector(
   selectRoot,
   (root: PropertyListState) => {
     if(!root) return null;
-    return root.resultList;
+    return root.propertyList;
+  }
+)
+export const selectStatus = createSelector(
+  selectPropertyList,
+  ( propertyList ) => {
+    if(!propertyList) return null;
+    return {
+      ready: propertyList.ready,
+      empty: propertyList.empty
+    }
   }
 )
 
-export const selectSaved = (state: any) => createSelector(
+export const selectResults = createSelector(
+  selectPropertyList,
+  ( propertyList ) => {
+    if(!propertyList) return null;
+    console.log(typeof(propertyList.propertyList));
+    return propertyList.propertyList;
+  }
+)
+
+export const selectSaved = createSelector(
   selectRoot,
   (root: PropertyListState) => {
     if(!root) return null;
-    return root.savedList;
+    return root.propertyList;
   }
 )
