@@ -1,8 +1,8 @@
-import PropertyList from "./modules/PropertyList"
+import HomePage from "./modules/HomePage"
 
 export const appRoutes : Array<any> = [
   {
     path: "/",
-    element: PropertyList
+    element: HomePage
   },
 ]

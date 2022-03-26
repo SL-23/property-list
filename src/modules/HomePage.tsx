@@ -1,14 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { AppBar,Box, Button, Container, Toolbar, Typography, IconButton, useTheme } from "@mui/material";
+import { AppBar, Box, Button, Container, Grid, Toolbar, Typography, IconButton, useTheme } from "@mui/material";
 import { Menu as MenuIcon } from '@mui/icons-material';
 import { LoadInitialData } from "../common/state/PropertyListActions";
 import { selectResults, selectStatus } from "../common/state/PropertyListSelectors";
 import ResultList from "./ResultList";
+import SavedList from "./SavedList";
 
-
-
-const PropertyList = () => {
+const HomePage = () => {
   const theme = useTheme();
   const dispatch = useDispatch();
   const status = useSelector(selectStatus);
@@ -48,14 +47,21 @@ const PropertyList = () => {
           >
             Property list
           </Typography>
-          <ResultList/>
+         
         </Toolbar>
       </AppBar>
+      <Grid container>
+        <Grid item xs={6}>
+          <ResultList/>
+        </Grid>
+        <Grid item xs={6}>
+          <SavedList/>
+        </Grid>
 
-      
+      </Grid>
       
     </Container>
   )
 }
 
-export default PropertyList;
+export default HomePage;

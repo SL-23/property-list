@@ -25,15 +25,17 @@ export const selectResults = createSelector(
   selectPropertyList,
   ( propertyList ) => {
     if(!propertyList) return null;
-    console.log(typeof(propertyList.propertyList));
-    return propertyList.propertyList;
+    // results should only display non-expired properties
+    const resultList = Object.values(propertyList.propertyList).filter(p => !p.expired);
+    return resultList;
   }
 )
 
 export const selectSaved = createSelector(
-  selectRoot,
-  (root: PropertyListState) => {
-    if(!root) return null;
-    return root.propertyList;
+  selectPropertyList,
+  ( propertyList ) => {
+    if(!propertyList) return null;
+    const savedList = Object.values(propertyList.propertyList).filter(p => p.saved);
+    return savedList;
   }
 )
