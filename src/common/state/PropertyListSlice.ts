@@ -1,5 +1,5 @@
 import { ActionReducerMapBuilder, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { getPropertyList } from "./PropertyListActions";
+import { getPropertyList, addSave, removeSave } from "./PropertyListActions";
 import { PropertyListState, PropertyItem } from "./PropertyListModels";
 
 const initialList: Record<string, PropertyItem> = {};
@@ -22,6 +22,18 @@ const extraReducers = (builder: ActionReducerMapBuilder<PropertyListState>) => {
       })
       state.empty = list.length < 1;
       state.ready = true;
+    }
+  )
+  builder.addCase(
+    addSave,
+    (state: PropertyListState, action: PayloadAction<string>) => {
+      state.propertyList[action.payload].saved = true;
+    }
+  )
+  builder.addCase(
+    removeSave,
+    (state: PropertyListState, action: PayloadAction<string>) => {
+      state.propertyList[action.payload].saved = false;
     }
   )
 }

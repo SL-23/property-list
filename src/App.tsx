@@ -22,7 +22,6 @@ const Template : FC<TemplateProps> = (props: TemplateProps) => {
 }
 
 const App = () => {
-  //console.log(appRoutes);
   return (
     <>
       <Routes>

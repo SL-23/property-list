@@ -4,7 +4,7 @@ import { AppBar, Box, Button, Container, Grid, Toolbar, Typography, Stack, IconB
 import { Menu as MenuIcon } from '@mui/icons-material';
 import { StarBorder as StarBorderIcon, Star as StarIcon, Bed as BedIcon, Shower as ShowerIcon, DirectionsCar as DirectionsCarIcon, AspectRatio as AspectRatioIcon } from '@mui/icons-material';
 import PropertyInfoIcon from "./PropertyInfoIcon";
-import { fontWeight } from "@mui/system";
+import { addSave, removeSave } from "../../common/state/PropertyListActions";
 
 interface PropertyBoxProps {
   agency:any;
@@ -12,10 +12,19 @@ interface PropertyBoxProps {
   mainImage: string;
   saved: boolean;
   expired: boolean;
+  propertyId: string;
 }
 const PropertyBox = (props: PropertyBoxProps) => {
   const theme = useTheme();
-  console.log(props.agency.brandingColors.primary);
+  const dispatch = useDispatch();
+  
+  const handleSave = (propertyId: string) => {
+    dispatch(addSave(propertyId));
+  }
+
+  const handleRemove = (propertyId: string) => {
+    dispatch(removeSave(propertyId));
+  }
   return (
    <Box
     sx={{
@@ -64,11 +73,14 @@ const PropertyBox = (props: PropertyBoxProps) => {
           sx={{
             justifyContent: "flex-end",
           }}
+          disabled={props.expired}
+          onClick={props.saved ? () => handleRemove(props.propertyId) : () => handleSave(props.propertyId)}
         >
           {
           props.saved ?
           <StarIcon
             style={{ color:"#FFC30B" }}
+            
           />
           :
           <StarBorderIcon

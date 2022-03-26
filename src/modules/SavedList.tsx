@@ -26,6 +26,7 @@ const SavedList = () => {
             mainImage={p.mainImage}
             saved={p.saved}
             expired={p.expired}
+            propertyId={p.id}
           />
         ))
       }

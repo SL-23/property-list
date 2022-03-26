@@ -1,4 +1,4 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
 import { PropertyService } from "../services";
 import { PropertyItem } from "./PropertyListModels";
 
@@ -41,7 +41,6 @@ export const getPropertyList = createAsyncThunk(
           item.saved = true;
         }
       })
-      //console.log(list);
       return list;
     }
     catch (ex: any) {
@@ -60,4 +59,22 @@ export const LoadInitialData = createAsyncThunk(
      return rejectWithValue(ex.message)
    }
  }
+)
+
+export const addSave = createAction(
+  "propertyList/addSave",
+  (propertyId: string) => {
+    return {
+      payload: propertyId
+    }
+  }
+)
+
+export const removeSave = createAction(
+  "propertyList/removeSave",
+  (propertyId: string) => {
+    return {
+      payload: propertyId
+    }
+  }
 )

@@ -6,7 +6,6 @@ import PropertyBox from "./common/PropertyBox";
 const ResultList = () => {
   const theme = useTheme();
   const results = useSelector(selectResults);
-  console.log(results);
   if(!results) return null;
   return (
     <Box
@@ -29,6 +28,7 @@ const ResultList = () => {
             mainImage={p.mainImage}
             saved={p.saved}
             expired={p.expired}
+            propertyId={p.id}
           />
         ))
       }

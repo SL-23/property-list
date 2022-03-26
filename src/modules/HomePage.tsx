@@ -11,13 +11,12 @@ const HomePage = () => {
   const theme = useTheme();
   const dispatch = useDispatch();
   const status = useSelector(selectStatus);
-  console.log(status);
   useEffect(() => {
     dispatch(LoadInitialData());
   }, [])
   if(!status) return null;
-  if(status.empty) return null;
-  if(!status.ready) console.log("loading"); 
+  if(status.empty) return <div>no data</div>
+  if(!status.ready) return <div>loading</div>
   
   return (
     <Container 
