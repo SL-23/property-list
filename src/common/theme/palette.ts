@@ -23,9 +23,11 @@ const palette = (theme: Theme) => {
   theme.palette.primary.light = "#BB86FC";
   theme.palette.primary.dark = "#3700B3";
   // grey
+  theme.palette.text.primary = "#3D3B40";
+  theme.palette.text.secondary = "#A5ADB5";
   theme.palette.secondary.main = "#A5ADB5";
-  theme.palette.secondary.dark = "#333F48";
-  theme.palette.secondary.light = "#D2D5DA";
+  theme.palette.secondary.dark = "#3D3B40";
+  theme.palette.secondary.light = "#C1C1C1";
 
 }
 

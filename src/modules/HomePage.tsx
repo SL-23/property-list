@@ -21,7 +21,7 @@ const HomePage = () => {
   
   return (
     <Container 
-      maxWidth="md"
+      maxWidth="xl"
       sx={{
         minHeight: "1000px",
       }}
@@ -42,7 +42,6 @@ const HomePage = () => {
           </IconButton>
           <Typography 
             variant="h6" 
-            color={theme.palette.secondary.dark}
             sx={{ flexGrow: 1 }}
           >
             Property list
