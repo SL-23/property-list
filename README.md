@@ -1,3 +1,8 @@
+Description: a simple app to display a property list
+Functions: save/ unsave a property
+
+libraries used: redux-toolkit | react-router-dom | mui
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
