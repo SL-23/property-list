@@ -73,7 +73,6 @@ const PropertyBox = (props: PropertyBoxProps) => {
           sx={{
             justifyContent: "flex-end",
           }}
-          disabled={props.expired}
           onClick={props.saved ? () => handleRemove(props.propertyId) : () => handleSave(props.propertyId)}
         >
           {

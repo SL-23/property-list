@@ -11,6 +11,7 @@ const HomePage = () => {
   const theme = useTheme();
   const dispatch = useDispatch();
   const status = useSelector(selectStatus);
+  
   useEffect(() => {
     dispatch(LoadInitialData());
   }, [])
@@ -49,10 +50,10 @@ const HomePage = () => {
         </Toolbar>
       </AppBar>
       <Grid container>
-        <Grid item xs={6}>
+        <Grid item xs={12} lg={6}>
           <ResultList/>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12} lg={6}>
           <SavedList/>
         </Grid>
 
