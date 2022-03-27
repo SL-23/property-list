@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { AppBar, Box, Button, Container, Grid, Toolbar, Typography, IconButton, useTheme } from "@mui/material";
+import { AppBar, Container, Grid, Toolbar, Typography, IconButton, useTheme } from "@mui/material";
 import { Menu as MenuIcon } from '@mui/icons-material';
 import { LoadInitialData } from "../common/state/PropertyListActions";
-import { selectResults, selectStatus } from "../common/state/PropertyListSelectors";
+import { selectStatus } from "../common/state/PropertyListSelectors";
 import ResultList from "./ResultList";
 import SavedList from "./SavedList";
 

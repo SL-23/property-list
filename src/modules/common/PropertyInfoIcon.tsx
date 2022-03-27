@@ -1,4 +1,4 @@
-import { AppBar, Box, Button, Container, Grid, Toolbar, Typography, Stack, IconButton, useTheme } from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
 
 interface PropertyInfoIconProps {
   icon: React.ReactNode;

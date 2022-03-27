@@ -1,10 +1,8 @@
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { AppBar, Box, Button, Container, Grid, Toolbar, Typography, Stack, IconButton, useTheme } from "@mui/material";
-import { Menu as MenuIcon } from '@mui/icons-material';
+import { useDispatch } from "react-redux";
+import { Box, Typography, Stack, IconButton, useTheme } from "@mui/material";
 import { StarBorder as StarBorderIcon, Star as StarIcon, Bed as BedIcon, Shower as ShowerIcon, DirectionsCar as DirectionsCarIcon, AspectRatio as AspectRatioIcon } from '@mui/icons-material';
-import PropertyInfoIcon from "./PropertyInfoIcon";
 import { addSave, removeSave } from "../../common/state/PropertyListActions";
+import PropertyInfoIcon from "./PropertyInfoIcon";
 
 interface PropertyBoxProps {
   agency:any;
@@ -115,6 +113,10 @@ const PropertyBox = (props: PropertyBoxProps) => {
         <PropertyInfoIcon
           icon={<DirectionsCarIcon/>}
           text="1"
+        />
+        <PropertyInfoIcon
+          icon={<AspectRatioIcon/>}
+          text="600 m²"
         />
         <Typography 
           color={theme.palette.secondary.light}
