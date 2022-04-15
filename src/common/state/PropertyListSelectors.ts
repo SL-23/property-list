@@ -26,7 +26,7 @@ export const selectResults = createSelector(
   ( propertyList ) => {
     if(!propertyList) return null;
     // results should only display non-expired properties
-    const resultList = Object.values(propertyList.propertyList).filter(p => !p.expired);
+    const resultList = Object.values(propertyList.propertyList).filter(p => !p.expired && !p.disabled);
     return resultList;
   }
 )
@@ -37,5 +37,14 @@ export const selectSaved = createSelector(
     if(!propertyList) return null;
     const savedList = Object.values(propertyList.propertyList).filter(p => p.saved);
     return savedList;
+  }
+)
+
+export const selectDisabled = createSelector(
+  selectPropertyList,
+  ( propertyList ) => {
+    if(!propertyList) return null;
+    const disabledList = Object.values(propertyList.propertyList).filter(p => p.disabled);
+    return disabledList;
   }
 )

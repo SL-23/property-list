@@ -10,11 +10,12 @@ export interface PropertyItem {
   mainImage: string;
   saved: boolean;
   expired: boolean;
+  disabled: boolean;
 }
 
 export interface PropertyListState {
   empty: boolean;
   ready: boolean;
   // use hashmap
-  propertyList: Record<string, PropertyItem>
+  propertyList: Record<string, PropertyItem>;
 }

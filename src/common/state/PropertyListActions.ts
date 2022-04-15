@@ -8,10 +8,10 @@ enum PropertyListRequest {
 }
 
 const createPropertyItem  = (p: any, isSaved: boolean, isExpired: boolean) => {
-  const id = p.id;
   const item = { ... p};
   item.saved = isSaved;
   item.expired = isExpired;
+  item.disabled = false;
 
   return item;
 }
@@ -72,6 +72,15 @@ export const addSave = createAction(
 
 export const removeSave = createAction(
   "propertyList/removeSave",
+  (propertyId: string) => {
+    return {
+      payload: propertyId
+    }
+  }
+)
+
+export const disableProperty = createAction(
+  "propertyList/disableProperty",
   (propertyId: string) => {
     return {
       payload: propertyId

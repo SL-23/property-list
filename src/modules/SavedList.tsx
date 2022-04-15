@@ -26,7 +26,9 @@ const SavedList = () => {
             mainImage={p.mainImage}
             saved={p.saved}
             expired={p.expired}
+            disabled={p.disabled}
             propertyId={p.id}
+            showDisableButton={false}
           />
         ))
       }

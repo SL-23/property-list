@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
-import { Box, Typography, Stack, IconButton, useTheme } from "@mui/material";
+import { Box, Button, Typography, Stack, IconButton, useTheme } from "@mui/material";
 import { StarBorder as StarBorderIcon, Star as StarIcon, Bed as BedIcon, Shower as ShowerIcon, DirectionsCar as DirectionsCarIcon, AspectRatio as AspectRatioIcon } from '@mui/icons-material';
-import { addSave, removeSave } from "../../common/state/PropertyListActions";
+import { addSave, removeSave, disableProperty } from "../../common/state/PropertyListActions";
 import PropertyInfoIcon from "./PropertyInfoIcon";
 
 interface PropertyBoxProps {
@@ -10,7 +10,9 @@ interface PropertyBoxProps {
   mainImage: string;
   saved: boolean;
   expired: boolean;
+  disabled: boolean;
   propertyId: string;
+  showDisableButton: boolean;
 }
 const PropertyBox = (props: PropertyBoxProps) => {
   const theme = useTheme();
@@ -23,6 +25,11 @@ const PropertyBox = (props: PropertyBoxProps) => {
   const handleRemove = (propertyId: string) => {
     dispatch(removeSave(propertyId));
   }
+
+  const handleDisable = (propertyId: string) => {
+    dispatch(disableProperty(propertyId));
+  }
+
   return (
    <Box
     sx={{
@@ -30,8 +37,8 @@ const PropertyBox = (props: PropertyBoxProps) => {
       borderRadius: 2,
       boxShadow: 5,
       mb: 5,
-      backgroundColor: props.expired ? "#F1F1F1" : "",
-      opacity: props.expired ? [0, 0, 0.5] : "",
+      backgroundColor:( props.expired || props.disabled) ? "#F1F1F1" : "",
+      opacity:( props.expired || props.disabled) ? [0, 0, 0.5] : "",
     }}
    >
      <Box
@@ -67,24 +74,33 @@ const PropertyBox = (props: PropertyBoxProps) => {
         >
           <b>{props.price}</b>
         </Typography>
-        <IconButton
-          sx={{
-            justifyContent: "flex-end",
-          }}
-          onClick={props.saved ? () => handleRemove(props.propertyId) : () => handleSave(props.propertyId)}
-        >
-          {
-          props.saved ?
-          <StarIcon
-            style={{ color:"#FFC30B" }}
-            
-          />
-          :
-          <StarBorderIcon
-            
-          />
+        <Box>
+          {props.showDisableButton && 
+            <Button
+              onClick={() => handleDisable(props.propertyId)}
+            >
+              Disable
+            </Button>
           }
-        </IconButton>
+          <IconButton
+            sx={{
+              justifyContent: "flex-end",
+            }}
+            onClick={props.saved ? () => handleRemove(props.propertyId) : () => handleSave(props.propertyId)}
+          >
+            {
+            props.saved ?
+            <StarIcon
+              style={{ color:"#FFC30B" }}
+              
+            />
+            :
+            <StarBorderIcon
+              
+            />
+            }
+          </IconButton>
+        </Box>
       </Box>
       
       <Typography
@@ -128,10 +144,8 @@ const PropertyBox = (props: PropertyBoxProps) => {
           color: theme.palette.secondary.dark
         }}>House</Typography>
       </Box>
-      
-
-      
     </Stack>
+    
      
    </Box>
   )
